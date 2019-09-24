@@ -31,3 +31,4 @@ class CreateCargosTable extends Migration
         Schema::dropIfExists('cargos');
     }
 }
+ 

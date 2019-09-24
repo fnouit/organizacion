@@ -11,6 +11,17 @@ class GenerosTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Genero::class)->create([
+            'genero' => 'SIN ESPECIFICAR',
+        ]);
+        factory(App\Genero::class)->create([
+            'genero' => 'MUJER',
+        ]);
+        factory(App\Genero::class)->create([
+            'genero' => 'HOMBRE',
+        ]);
+        factory(App\Genero::class)->create([
+            'genero' => 'LGTBIQ',
+        ]);
     }
 }

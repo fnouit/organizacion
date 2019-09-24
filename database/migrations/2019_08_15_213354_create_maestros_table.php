@@ -22,26 +22,36 @@ class CreateMaestrosTable extends Migration
             $table->string('ap_paterno',180);
             $table->string('ap_materno',180);
             $table->string('rfc',180);
+            $table->unsignedInteger('genero_id')->unsigned();
+            $table->unsignedInteger('cargo_id')->unsigned();
+            
             
 
-            $table->unsignedInteger('genero_id')->unsigned();
-            $table->unsignedInteger('estudio_id')->unsigned();
-            $table->unsignedInteger('situacion_id')->unsigned();
             $table->string('email')->unique();
+            $table->string('celular')->nullable();
             $table->string('telefono')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('seccion')->nullable()->default('56');
             $table->string('estado')->nullable()->default('VERACRUZ');
+
+            // Datos de domicilio 
+            $table->string('calle')->nullable();
+            $table->string('numeto_ext')->nullable();
+            $table->string('colonia')->nullable();
+            $table->string('cp')->nullable();
+            $table->string('municipio')->nullable();
+            $table->string('ciudad')->nullable();
+
             $table->string('imagen')->default('avatar.png');
             $table->softDeletes();
 
-            $table->unsignedInteger('user_id')->unsigned();
             $table->foreign('delegacion_id')->references('id')->on('delegacions');
-            $table->foreign('estudio_id')->references('id')->on('estudios');
-            $table->foreign('situacion_id')->references('id')->on('situacions');
+            $table->foreign('secretaria_id')->references('id')->on('secretarias');
             $table->foreign('genero_id')->references('id')->on('generos');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('cargo_id')->references('id')->on('cargos');
+
+
         });
     }
 

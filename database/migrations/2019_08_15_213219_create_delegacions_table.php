@@ -21,6 +21,8 @@ class CreateDelegacionsTable extends Migration
             $table->unsignedInteger('nivel_id');
             $table->integer('region_id')->unsigned();            
             $table->string('deleg')->unique();
+            $table->datetime('p_inicial');
+            $table->datetime('p_final');            
             $table->softDeletes();
             
             $table->foreign('nomenclatura_id')->references('id')->on('nomenclaturas');

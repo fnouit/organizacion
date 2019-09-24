@@ -11,6 +11,14 @@ class ComitesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Comite::class)->create([
+            'nombre' => 'ACTIVOS',
+        ]);
+        factory(App\Comite::class)->create([
+            'nombre' => 'JUBILADOS',
+        ]);
+        factory(App\Comite::class)->create([
+            'nombre' => 'CENTRO DE TRABAJO',
+        ]);
     }
 }

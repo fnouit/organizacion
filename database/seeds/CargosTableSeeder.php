@@ -11,6 +11,11 @@ class CargosTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Cargo::class)->create([
+            'nombre' => 'TITULAR',
+        ]);
+        factory(App\Cargo::class)->create([
+            'nombre' => 'SUPLENTE',
+        ]);
     }
 }

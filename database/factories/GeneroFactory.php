@@ -2,8 +2,8 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(App\Genero::class, function (Faker $faker) {
     return [
-        //
+        'genero' => $faker->name,
     ];
 });
