@@ -13,15 +13,19 @@ class GenerosTableSeeder extends Seeder
     {
         factory(App\Genero::class)->create([
             'genero' => 'SIN ESPECIFICAR',
+            'slug' => 'sin'
         ]);
         factory(App\Genero::class)->create([
             'genero' => 'MUJER',
+            'slug' => 'mujer'
         ]);
         factory(App\Genero::class)->create([
             'genero' => 'HOMBRE',
+            'slug' => 'hombre'
         ]);
         factory(App\Genero::class)->create([
             'genero' => 'LGTBIQ',
+            'slug' => 'lgtbiq'
         ]);
     }
 }

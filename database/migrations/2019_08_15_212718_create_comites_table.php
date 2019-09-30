@@ -16,6 +16,7 @@ class CreateComitesTable extends Migration
         Schema::create('comites', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre',180);
+            $table->string('slug')->unique();                 
             $table->softDeletes();
             $table->timestamps();
         });

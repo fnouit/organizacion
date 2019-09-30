@@ -17,6 +17,7 @@ class CreateSecretariasTable extends Migration
             $table->increments('id');
             $table->string('cartera',180);
             $table->unsignedInteger('comite_id');
+            $table->string('slug')->unique();                 
             $table->softDeletes();
             $table->timestamps();
 

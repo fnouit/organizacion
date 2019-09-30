@@ -23,12 +23,13 @@ class CreateDelegacionsTable extends Migration
             $table->string('deleg')->unique();
             $table->datetime('p_inicial');
             $table->datetime('p_final');            
+            $table->string('slug')->unique();     
             $table->softDeletes();
-            
+            $table->timestamps();
+
             $table->foreign('nomenclatura_id')->references('id')->on('nomenclaturas');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->foreign('nivel_id')->references('id')->on('nivels');            
-            $table->timestamps();
         });
     }
 

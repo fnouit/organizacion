@@ -14,7 +14,8 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+        $regiones = Region::all();
+        return view('admin.region.index', compact('regiones'));  // Listado 
     }
 
     /**
@@ -55,9 +56,11 @@ class RegionController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function edit(Region $region)
+    public function edit($slug)
     {
-        //
+        $region = Region::where('slug', $slug)->first();
+
+        return view('admin.region.edit')->withRegion($region);        
     }
 
     /**
@@ -67,9 +70,30 @@ class RegionController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Region $region)
+    public function update(Request $request, $slug)
     {
-        //
+        $mensaje =[
+            'nombre.required' => 'Es necesario ingresar un nombre para la Región',
+            'sede.required' => 'El nombre de la sede es necesario',
+            'coordinador.required' => 'Nombre de coordinador es requerido',
+        ];
+        $reglas = [
+            'nombre' => 'required',
+            'sede' => 'required',
+            'coordinador' => 'required',
+        ];
+
+        $this->validate($request, $reglas, $mensaje);
+        $region = Region::where('slug','=', $slug)->firstOrFail();
+        
+        $region->nombre = $request->nombre;
+        $region->sede = $request->sede;
+        $region->coordinador = $request->coordinador;        
+        $region->save();
+
+
+        // return $request;
+        return redirect()->route('region');
     }
 
     /**

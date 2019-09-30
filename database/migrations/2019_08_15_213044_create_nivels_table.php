@@ -16,6 +16,7 @@ class CreateNivelsTable extends Migration
         Schema::create('nivels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nivel_educativo', 180);
+            $table->string('slug')->unique();     
             $table->softDeletes();
             $table->timestamps();
         });

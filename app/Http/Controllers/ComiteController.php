@@ -14,7 +14,8 @@ class ComiteController extends Controller
      */
     public function index()
     {
-        //
+        $comites = Comite::all();
+        return view('admin.comite.index', compact('comites'));  // Listado 
     }
 
     /**

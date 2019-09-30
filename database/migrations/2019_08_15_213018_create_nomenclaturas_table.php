@@ -16,6 +16,7 @@ class CreateNomenclaturasTable extends Migration
         Schema::create('nomenclaturas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nomenclatura',180);
+            $table->string('slug')->unique();     
             $table->softDeletes();
             $table->timestamps();
         });

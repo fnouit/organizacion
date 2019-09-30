@@ -18,6 +18,7 @@ class CreateRegionsTable extends Migration
             $table->string('nombre',180);
             $table->string('sede',180);
             $table->string('coordinador',180);  
+            $table->string('slug')->unique();                   
             $table->softDeletes();                   
             $table->timestamps();
         });

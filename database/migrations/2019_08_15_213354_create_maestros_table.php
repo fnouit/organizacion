@@ -16,6 +16,7 @@ class CreateMaestrosTable extends Migration
         Schema::create('maestros', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('delegacion_id')->unsigned();
+            $table->string('slug')->unique();     
             $table->unsignedInteger('secretaria_id')->unsigned();
 
             $table->string('nombre',180);
@@ -24,7 +25,7 @@ class CreateMaestrosTable extends Migration
             $table->string('rfc',180);
             $table->unsignedInteger('genero_id')->unsigned();
             $table->unsignedInteger('cargo_id')->unsigned();
-            
+                        
             
 
             $table->string('email')->unique();
@@ -37,7 +38,7 @@ class CreateMaestrosTable extends Migration
 
             // Datos de domicilio 
             $table->string('calle')->nullable();
-            $table->string('numeto_ext')->nullable();
+            $table->string('numero_ext')->nullable();
             $table->string('colonia')->nullable();
             $table->string('cp')->nullable();
             $table->string('municipio')->nullable();

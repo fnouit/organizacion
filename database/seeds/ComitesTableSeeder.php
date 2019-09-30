@@ -13,12 +13,15 @@ class ComitesTableSeeder extends Seeder
     {
         factory(App\Comite::class)->create([
             'nombre' => 'ACTIVOS',
+            'slug' => 'activo'
         ]);
         factory(App\Comite::class)->create([
             'nombre' => 'JUBILADOS',
+            'slug' => 'jubilado'
         ]);
         factory(App\Comite::class)->create([
             'nombre' => 'CENTRO DE TRABAJO',
+            'slug' => 'c_t'
         ]);
     }
 }
