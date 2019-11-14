@@ -18,7 +18,8 @@ class AddDomicilioToDelegacions extends Migration
             $table->string('numero_ext')->nullable()->after('calle');
             $table->string('colonia')->nullable()->after('numero_ext');
             $table->string('cp')->nullable()->after('colonia');
-            $table->string('ciudad')->nullable()->after('cp');
+            $table->string('telefono')->nullable()->after('cp');
+            $table->string('ciudad')->nullable()->after('telefono');
             $table->string('municipio')->nullable()->after('ciudad');
         });
     }

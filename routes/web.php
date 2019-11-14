@@ -25,3 +25,6 @@ Route::get('/delegacion','DelegacionController@index')->name('delegacion');
 Route::get('/delegacion/nueva','DelegacionController@create')->name('delegacion.create');
 Route::post('/delegacion/nueva','DelegacionController@store')->name('delegacion.store');
 Route::get('/delegacion/{slug}/','DelegacionController@show')->name('delegacion.show');  
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

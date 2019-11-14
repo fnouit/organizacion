@@ -35,7 +35,12 @@
                                                         <tr role="row">
                                                             <th class="sorting" tabindex="0"
                                                                 aria-controls="DataTables_Table_0" rowspan="1"
-                                                                colspan="2"
+                                                                colspan="1"
+                                                                aria-label="Username: activate to sort column ascending"
+                                                                >NÚMERO</th>
+                                                            <th class="sorting" tabindex="0"
+                                                                aria-controls="DataTables_Table_0" rowspan="1"
+                                                                colspan="1"
                                                                 aria-label="Username: activate to sort column ascending"
                                                                 >INFORMACIÓN</th>
                                                             <th class="sorting" tabindex="0"
@@ -75,20 +80,11 @@
                                                                     <i class="icon-eye"></i>&nbsp; Mostrar
                                                                 </a>
                                                             </td>
-
-
-
                                                             <td>{{$delegacion->deleg}}</td>
                                                             <td>{{$delegacion->sede}}</td>
                                                             <td>{{$delegacion->nivel->nivel_educativo}}</td>
-                                                            <td>
-                                                                {{$delegacion->region->nombre}} - 
-                                                                {{$delegacion->region->sede}}
-                                                            </td>
-                                                            <td>
-                                                            </td>
-
-
+                                                            <td>{{$delegacion->region->nombre}} - {{$delegacion->region->sede}}</td>
+                                                            <td>&nbsp</td>
                                                         </tr> 
                                                         @endforeach
                                                     </tbody>

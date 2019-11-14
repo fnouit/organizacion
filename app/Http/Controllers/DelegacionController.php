@@ -45,14 +45,39 @@ class DelegacionController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $mensaje =[
-            'numero.required' => 'Es necesario ingresar un numero en el campo NÚMERO DELEGACIONAL.',
-            'numero.numeric' => 'El campo NÚMERO DELEGACIONAL no tiene que contener texto.',
-            'sede.required' => 'Es necesario ingresar un nombre en el campo SEDE.'
+            'nomenclatura.required' => '¿SELECCIONA NOMENCLATURA?',
+            'numero.required' => 'SE REQUIERE NÚMERO DELEGACIONAL.',
+            'numero.numeric' => 'SOLO SE INGRESA NÚMEROS.',
+            'sede.required' => 'INGRESA NOMBRE EN EL CAMPO SEDE.',
+            'calle.required' => 'LLENA EL CAMPO CALLE',
+            'num.required' => 'LLENA EL CAMPO',
+            'colonia.required' => 'FALTA COLONIA',
+            'cp.required' => 'FALTA CP',
+            'telefono.required' => 'INGRESA TELÉFONO',
+            'ciudad.required' => '¿CUAL ES LA CIUDAD?',
+            'municipio.required' => '¿CÚAL ES EL MUNICIPIO?',
+            'data_in.required' => 'FECHA INICIAL',
+            'data_out.required' => 'FECHA FINAL',
+            'nivel.required' => 'SELECCIONA UN NIVEL',
+            'region.required' => 'SELECCIONA UNA REGIÓN'
         ];
         $reglas = [
+            'nomenclatura' => 'required|numeric',
             'numero' => 'required|numeric',
-            'sede' => 'required'
+            'sede' => 'required',
+            'calle' => 'required',
+            'nivel' => 'required',
+            'region' => 'required',
+            'num' => 'required',
+            'colonia' => 'required',
+            'cp' => 'required',
+            'telefono' => 'required',
+            'ciudad' => 'required',
+            'municipio' => 'required',
+            'data_in' => 'required',
+            'data_out' => 'required'
         ];
         $this->validate($request, $reglas, $mensaje);
         $delegacion = new Delegacion();
@@ -66,6 +91,19 @@ class DelegacionController extends Controller
         $valueNom = Nomenclatura::find($delegacion->nomenclatura_id);
         $delegacion->slug=$valueNom->nomenclatura.$delegacion->numero;
         $delegacion->deleg=$valueNom->nomenclatura.$delegacion->numero;
+
+        
+        $delegacion->calle = $request->get('calle');	
+        $delegacion->numero_ext = $request->get('num');	
+        $delegacion->colonia = $request->get('colonia');	
+        $delegacion->cp = $request->get('cp');	
+        $delegacion->telefono = $request->get('telefono');	
+        $delegacion->ciudad = $request->get('ciudad');	
+        $delegacion->municipio = $request->get('municipio');	
+        $delegacion->p_inicial = $request->get('data_in');	
+        $delegacion->p_final = $request->get('data_out');
+
+        // return $delegacion;
         
         $delegacion->save();
         return redirect('/delegacion')->with('success_create','La delegación '.$delegacion->nomenclatura->nomenclatura.$delegacion->numero.' se CREADO satisfactoriamente');
