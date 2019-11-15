@@ -38,7 +38,7 @@
                                                                     </div>
                                                                     <div class="form-group col-md-6">
                                                                         <label for="data_in"><strong>PERIODO SINDICAL</strong></label>
-                                                                        <input class="form-control" type="text" placeholder="{{$delegacion->p_inicial}} al {{$delegacion->p_final}}" readonly>
+                                                                        <input class="form-control" type="text" placeholder="{{\Carbon\Carbon::parse($delegacion->p_inicial)->format('d/m/Y')}}  AL   {{\Carbon\Carbon::parse($delegacion->p_final)->format('d/m/Y')}}" readonly>
                                                                     </div>
                                                                 </div>
 
@@ -118,10 +118,6 @@
                                                                         <input type="text" class="form-control" placeholder="VERACRUZ" readonly>
                                                                     </div>
                                                                 </div>
-                                                                
-                                                                <div class="row">
-                                                                </div>
-                                                                
 
 
 
@@ -154,8 +150,11 @@
                                                                                     <button class="btn btn-secondary"
                                                                                         type="button"
                                                                                         data-dismiss="modal">CANCELAR</button>
-                                                                                    <button class="btn btn-danger"
-                                                                                        type="button">ELIMINAR</button>
+                                                                                    <form id="logout-form" action="{{ route('delegacion.delete',[$delegacion->slug]) }}" method="POST" >
+                                                                                        {{ method_field('PUT') }}
+                                                                                        @csrf
+                                                                                        <button class="btn btn-danger" type="submit">ELIMINAR</button>
+                                                                                    </form>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

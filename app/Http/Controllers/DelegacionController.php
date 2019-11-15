@@ -7,6 +7,7 @@ use App\Delegacion;
 use App\Region;
 use App\Nomenclatura;
 use App\Nivel;
+use Carbon\Carbon;
 
 class DelegacionController extends Controller
 {
@@ -45,7 +46,8 @@ class DelegacionController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        $delegacion = new Delegacion();
+
         $mensaje =[
             'nomenclatura.required' => '¿SELECCIONA NOMENCLATURA?',
             'numero.required' => 'SE REQUIERE NÚMERO DELEGACIONAL.',
@@ -61,7 +63,8 @@ class DelegacionController extends Controller
             'data_in.required' => 'FECHA INICIAL',
             'data_out.required' => 'FECHA FINAL',
             'nivel.required' => 'SELECCIONA UN NIVEL',
-            'region.required' => 'SELECCIONA UNA REGIÓN'
+            'region.required' => 'SELECCIONA UNA REGIÓN',
+            $delegacion->deleg.'unique' => 'DELEGACIÓN DUPLICADA'
         ];
         $reglas = [
             'nomenclatura' => 'required|numeric',
@@ -77,10 +80,11 @@ class DelegacionController extends Controller
             'ciudad' => 'required',
             'municipio' => 'required',
             'data_in' => 'required',
-            'data_out' => 'required'
+            'data_out' => 'required',
+            $delegacion->deleg => 'unique',
         ];
+
         $this->validate($request, $reglas, $mensaje);
-        $delegacion = new Delegacion();
         
         $delegacion->nomenclatura_id = $request->get('nomenclatura');
         $delegacion->numero = $request->input('numero');
@@ -117,7 +121,7 @@ class DelegacionController extends Controller
      */
     public function show($slug)
     {
-        $delegacion = Delegacion::where('slug', $slug)->firstOrFail();;
+        $delegacion = Delegacion::where('slug', $slug)->firstOrFail();
         return view('admin.delegacion.show',compact('delegacion'));
     }
 
@@ -150,8 +154,10 @@ class DelegacionController extends Controller
      * @param  \App\Delegacion  $delegacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Delegacion $delegacion)
+    public function destroy($slug)
     {
-        //
+        $delegacion = Delegacion::where('slug', $slug)->firstOrFail();
+        $delegacion->delete();
+        return redirect('/delegacion');
     }
 }

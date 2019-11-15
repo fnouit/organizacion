@@ -11,6 +11,8 @@
 |
 */
 
+use Carbon\Carbon;
+
 Route::get('/', function () {
     return view('index');
 });
@@ -25,6 +27,15 @@ Route::get('/delegacion','DelegacionController@index')->name('delegacion');
 Route::get('/delegacion/nueva','DelegacionController@create')->name('delegacion.create');
 Route::post('/delegacion/nueva','DelegacionController@store')->name('delegacion.store');
 Route::get('/delegacion/{slug}/','DelegacionController@show')->name('delegacion.show');  
+Route::put('/delegacion/{slug}/delete','DelegacionController@destroy')->name('delegacion.delete');  
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('time', function(){
+    $actual = new Carbon();
+    // $actual->format('UTC -6');
+    $actual->format('d/m/Y');
+    
+    echo $actual;
+});

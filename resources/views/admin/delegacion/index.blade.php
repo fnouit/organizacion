@@ -84,7 +84,7 @@
                                                             <td>{{$delegacion->sede}}</td>
                                                             <td>{{$delegacion->nivel->nivel_educativo}}</td>
                                                             <td>{{$delegacion->region->nombre}} - {{$delegacion->region->sede}}</td>
-                                                            <td>&nbsp</td>
+                                                            <td>EMMANUEL SALOMON CORDOBA MARTINEZ</td>
                                                         </tr> 
                                                         @endforeach
                                                     </tbody>
