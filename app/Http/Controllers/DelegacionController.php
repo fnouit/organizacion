@@ -7,6 +7,7 @@ use App\Delegacion;
 use App\Region;
 use App\Nomenclatura;
 use App\Nivel;
+use App\Comite;
 use Carbon\Carbon;
 
 class DelegacionController extends Controller
@@ -35,7 +36,8 @@ class DelegacionController extends Controller
         $nomenclaturas = Nomenclatura::all();
         $niveles = Nivel::all();
         $regiones = Region::all();
-        return view ('admin.delegacion.create',compact('nomenclaturas','niveles','regiones'));
+        $comites = Comite::all();
+        return view ('admin.delegacion.create',compact('nomenclaturas','niveles','regiones','comites'));
     }
 
     /**
@@ -83,6 +85,8 @@ class DelegacionController extends Controller
             'data_out' => 'required',
             $delegacion->deleg => 'unique',
         ];
+
+        return $request;
 
         $this->validate($request, $reglas, $mensaje);
         
