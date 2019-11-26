@@ -26,4 +26,8 @@ class Delegacion extends Model
     public function nomenclatura() {
         return $this->belongsTo('App\Nomenclatura')->withDefault();
     }
+    public function estructuras()
+    {
+        return $this->hasMany('App\Estructura');
+    }
 }

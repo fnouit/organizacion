@@ -30,6 +30,11 @@ Route::get('/delegacion/{slug}/','DelegacionController@show')->name('delegacion.
 Route::put('/delegacion/{slug}/delete','DelegacionController@destroy')->name('delegacion.delete');  
 Auth::routes();
 
+#Estructura
+Route::get('/estructura','EstructuraController@index')->name('estructura');
+Route::get('/estructura/nueva','EstructuraController@create')->name('estructura.create');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('time', function(){
