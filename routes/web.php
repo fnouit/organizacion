@@ -13,12 +13,23 @@
 
 use Carbon\Carbon;
 
-Route::get('/', function () {
-    return view('index');
-});
+/* Route::get('/', function () {
+    return view('login');
+}); */
+
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('inicio'); 
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){ return view('index'); });
+Route::get('/welcome', function(){ return view('welcome'); });
+
+
 
 Route::get('/comite', 'ComiteController@index'); 
-Route::get ('/region', 'RegionController@index')->name('region');
+
+#Regiones
+Route::get ('/regiones', 'RegionController@show')->name('regiones');
+Route::get ('/getRegiones', 'RegionController@index')->name('getRegiones');
+
 Route::get ('/region/{slug}/edit', 'RegionController@edit')->name('region.edit');
 Route::put('/region/{slug}/edit', 'RegionController@update')->name('region.update');    
 
@@ -35,7 +46,7 @@ Route::get('/estructura','EstructuraController@index')->name('estructura');
 Route::get('/estructura/nueva','EstructuraController@create')->name('estructura.create');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('time', function(){
     $actual = new Carbon();

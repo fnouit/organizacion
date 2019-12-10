@@ -2,12 +2,13 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="El Sindicato Nacional de Trabajadores de la Educaci&oacute;n lo integran trabajadores de base, permanentes, interinos y transitorios al servicio de la educación, dependientes de la Secretaría de Educaci&oacute;n Pública">
+    <meta name="description"
+        content="El Sindicato Nacional de Trabajadores de la Educaci&oacute;n lo integran trabajadores de base, permanentes, interinos y transitorios al servicio de la educación, dependientes de la Secretaría de Educaci&oacute;n Pública">
     <meta name="keyword" content="Sección 56 del Sindicato Nacional de Trabajadores de la Educación">
-    <title>Intranet | Sección 56</title>
-    <title>Intranet | @yield('title')</title>
+    <title>Org :: NET | @yield('title')</title>
 
     <link href="{{asset('css/coreui-icons.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/flag-icon.min.css')}}" rel="stylesheet">
@@ -17,6 +18,7 @@
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/pace.min.css')}}" rel="stylesheet">
     <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+
     <script>
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
@@ -100,52 +102,63 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            <img class="navbar-brand-full" src="{{asset('img/brand/logo.svg')}}" width="89" height="25" alt="CoreUI Logo">
-            <img class="navbar-brand-minimized" src="{{asset('img/brand/sygnet.svg')}}" width="30" height="30" alt="CoreUI Logo">
+            <img class="navbar-brand-full" src="{{asset('img/brand/logo.svg')}}" width="89" height="25"
+                alt="CoreUI Logo">
+            <img class="navbar-brand-minimized" src="{{asset('img/brand/sygnet.svg')}}" width="30" height="30"
+                alt="CoreUI Logo">
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <!-- <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com"> -->
-                <a class="nav-link nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false"> 
-                    <i class="fa fa-unlock"></i> | 
-                    <strong>Nombre de Usuario</strong> &nbsp &nbsp &nbsp &nbsp 
-                </a> 
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-header text-center">
-                        <strong>Configuración</strong>
-                    </div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-user"></i> Perfil</a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-wrench"></i> Configuración</a>
 
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-lock"></i> Cerrar sesión </a>
-                </div>
-            </li>
+
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">
+                        <i class="fa fa-unlock"></i> |
+                        <strong>Inicia sesión</strong> &nbsp &nbsp &nbsp &nbsp
+                    </a>
+                </li>
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fa fa-unlock"></i> |
+                        <strong>{{ Auth::user()->name }}</strong> &nbsp
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-header text-center">
+                            <strong>Configuración</strong>
+                        </div>
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-user"></i> Perfil</a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fa fa-wrench"></i> Configuración</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                            <i class="fa fa-lock"></i> Cerrar sesión </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
+                <li class="nav-item"></li>
         </ul>
     </header>
     <div class="app-body">
         <div class="sidebar">
-        @include('layouts.sidebar')
+            @include('layouts.sidebar')
         </div>
-
         <!-- Inicio de contenido -->
-
         @yield('content')
-
         <!-- Fin de Div contenido -->
-
-
-
-
-
-
 
         <aside class="aside-menu">
             <ul class="nav nav-tabs" role="tablist">
@@ -165,7 +178,6 @@
                     </a>
                 </li>
             </ul>
-
         </aside>
     </div>
     <footer class="app-footer">
@@ -179,12 +191,13 @@
         </div>
     </footer>
 
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/popper.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/pace.min.js')}}"></script>
-    <script src="{{asset('js/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{asset('js/coreui.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/app.js') }}" defer></script>
+    <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/pace.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/perfect-scrollbar.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/coreui.min.js')}}"></script>
     <script>
     /* $('#ui-view').ajaxLoad();
     $(document).ajaxComplete(function() {
@@ -193,8 +206,7 @@
     </script>
 
     <script type="text/javascript" src="{{asset('js/jquery.dataTables.js')}}" class="view-script"></script>
-    <script type="text/javascript" src="{{asset('js/dataTables.bootstrap4.js')}}" class="view-script">
-    </script>
+    <script type="text/javascript" src="{{asset('js/dataTables.bootstrap4.js')}}" class="view-script"></script>
     <script type="text/javascript" src="{{asset('js/datatables.js')}}" class="view-script"></script>
 </body>
 

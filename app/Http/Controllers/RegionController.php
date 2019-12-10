@@ -12,10 +12,11 @@ class RegionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $regiones = Region::all();
-        return view('admin.region.index', compact('regiones'));  // Listado 
+        if($request->ajax()){
+            return $regiones = Region::all();
+        }
     }
 
     /**
@@ -45,9 +46,9 @@ class RegionController extends Controller
      * @param  \App\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show()
     {
-        //
+        return view('admin.region.index');
     }
 
     /**
